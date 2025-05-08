@@ -22,8 +22,6 @@ def conectar_oracle() -> Optional[cx_Oracle.Connection]:
             cursor.execute("SELECT 1 FROM DUAL")
             if cursor.fetchone()[0] != 1:
                 raise cx_Oracle.DatabaseError("Verificación de conexión fallida")
-        
-        print("✅ Conexión exitosa a Oracle")
         return conn
         
     except cx_Oracle.DatabaseError as e:

@@ -12,7 +12,7 @@ def asistente_tecnico():
             break
 
         palabras_clave = extraer_palabras_clave(entrada)
-        print(f"🔎 Palabras clave detectadas: {palabras_clave}")  # Opcional: para depurar
+        
 
         sintoma, causa, solucion = buscar_solucion(palabras_clave)
         

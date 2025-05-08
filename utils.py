@@ -24,7 +24,10 @@ sinonimos = {
     "sin red": "sin internet",
     "se congela": "lenta",
     "no se escucha": "sin sonido",
-    "se traba": "lenta"
+    "se traba": "lenta",
+    "bsod": "pantalla azul",
+    "kernel panic": "error grave",
+    "corrupto": "dañado"
 }
 
 def corregir_ortografia(texto):
