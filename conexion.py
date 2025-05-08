@@ -6,7 +6,7 @@ def conectar_oracle() -> Optional[cx_Oracle.Connection]:
         dsn = cx_Oracle.makedsn(
             host="localhost",
             port=1521,
-            service_name="xepdb1"
+            service_name="xe"
         )
         
         # Conexión normal sin SYSDBA

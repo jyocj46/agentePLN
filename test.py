@@ -1,25 +1,19 @@
 import cx_Oracle
 
-dsn = cx_Oracle.makedsn("localhost", 1521, service_name="xepdb1")
-conn = cx_Oracle.connect("C##AGENTE", "123456", dsn)
+dsn = cx_Oracle.makedsn("localhost", 1521, service_name="xe")
+conn = cx_Oracle.connect("C##AGENTE", "123456", dsn)  # Usa tus credenciales
 cursor = conn.cursor()
 
-try:
-    # Verifica usuario conectado
-    cursor.execute("SELECT username FROM user_users")
-    print("👤 Usuario conectado:", cursor.fetchone()[0])
+cursor.execute("""
+    SELECT owner, table_name 
+    FROM all_tables 
+    WHERE table_name = 'FALLAS_INFORMATICAS'
+""")
 
-    # Verifica PDB
-    cursor.execute("SELECT sys_context('userenv', 'con_name') FROM dual")
-    print("📦 PDB conectado:", cursor.fetchone()[0])
+resultados = cursor.fetchall()
+print("Tablas encontradas:")
+for owner, table in resultados:
+    print(f"👉 Esquema: {owner}, Tabla: {table}")
 
-    # Verifica si la tabla es accesible
-    cursor.execute("SELECT COUNT(*) FROM FALLAS_INFORMATICAS")
-    print("✅ Tabla accesible, total registros:", cursor.fetchone()[0])
-
-except cx_Oracle.DatabaseError as e:
-    print("❌ Error de base de datos:", e)
-
-finally:
-    cursor.close()
-    conn.close()
+cursor.close()
+conn.close()
